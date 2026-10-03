@@ -1,0 +1,2378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>SeBa.sl Home</title>
+
+<!-- SUPABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
+  <script>
+const SUPABASE_URL = "https://eoksnxperedpwzocakwz.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_GitlhcalHtwnZN8ugp-qQw_FofFHPAB";
+
+const supabase = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+);
+
+  </Script>
+<style>
+
+/* =====================================================
+   BASIC
+===================================================== */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#eef1f5;
+    color:#222;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.header{
+    height:65px;
+    background:white;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 20px;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    box-shadow:0 2px 8px rgba(0,0,0,.12);
+}
+
+
+/* LOGO */
+
+.logo{
+    font-size:28px;
+    font-weight:bold;
+    color:#e53935;
+    cursor:pointer;
+}
+
+
+/* SEARCH */
+
+.search{
+    width:320px;
+}
+
+.search input{
+    width:100%;
+    border:none;
+    outline:none;
+    background:#f0f2f5;
+    padding:12px 18px;
+    border-radius:25px;
+    font-size:15px;
+}
+
+
+/* DESKTOP NAV */
+
+.desktop-nav{
+    display:flex;
+    align-items:center;
+    gap:5px;
+}
+
+.desktop-nav a{
+    text-decoration:none;
+    color:#333;
+    padding:10px 12px;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+.desktop-nav a:hover{
+    background:#f0f2f5;
+}
+
+
+/* HEADER PROFILE */
+
+.header-user{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    cursor:pointer;
+}
+
+.header-user img{
+    width:42px;
+    height:42px;
+    object-fit:cover;
+    border-radius:50%;
+    border:2px solid #e53935;
+}
+
+.header-user span{
+    font-weight:bold;
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.page{
+    width:100%;
+    max-width:1100px;
+    margin:auto;
+    padding:20px 12px 100px;
+}
+
+
+/* =====================================================
+   STORIES
+===================================================== */
+
+.stories-container{
+    background:white;
+    padding:21px;
+    border-radius:16px;
+    margin-bottom:20px;
+    box-shadow:0 2px 7px rgba(0,0,0,.07);
+}
+
+.section-title{
+    font-size:21px;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+
+.stories{
+    display:flex;
+    gap:13px;
+    overflow-x:auto;
+    padding-bottom:5px;
+}
+
+.story{
+    min-width:125px;
+    height:180px;
+    border-radius:15px;
+    overflow:hidden;
+    position:relative;
+    cursor:pointer;
+    background:#ddd;
+}
+
+.story-background{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.story-avatar{
+    position:absolute;
+    top:10px;
+    left:10px;
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    object-fit:cover;
+    border:3px solid white;
+}
+
+.story-name{
+    position:absolute;
+    bottom:10px;
+    left:8px;
+    right:8px;
+    color:white;
+    font-weight:bold;
+    text-shadow:0 2px 5px black;
+}
+
+
+/* =====================================================
+   MOMENT / CREATE POST
+===================================================== */
+
+.moment{
+    background:white;
+    border-radius:16px;
+    padding:18px;
+    margin-bottom:20px;
+    box-shadow:0 2px 7px rgba(0,0,0,.07);
+}
+
+.moment-top{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.moment-top img{
+    width:55px;
+    height:55px;
+    object-fit:cover;
+    border-radius:50%;
+}
+
+.moment-input{
+    flex:1;
+    background:#f0f2f5;
+    color:#777;
+    border-radius:30px;
+    padding:16px 20px;
+    cursor:pointer;
+}
+
+.moment-input:hover{
+    background:#e3e6ea;
+}
+
+
+/* MOMENT ACTIONS */
+
+.moment-actions{
+    display:flex;
+    margin-top:15px;
+    padding-top:12px;
+    border-top:1px solid #eee;
+}
+
+.moment-action{
+    flex:1;
+    text-align:center;
+    padding:12px 5px;
+    cursor:pointer;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+.moment-action:hover{
+    background:#f0f2f5;
+}
+
+
+/* =====================================================
+   POST FORM
+===================================================== */
+
+.post-form{
+    display:none;
+    margin-top:15px;
+}
+
+.post-form textarea{
+    width:100%;
+    height:110px;
+    resize:none;
+    border:1px solid #ddd;
+    border-radius:10px;
+    padding:15px;
+    font-size:16px;
+    outline:none;
+}
+
+.selected-file{
+    margin-top:8px;
+    color:#555;
+    font-size:14px;
+}
+
+.publish-button{
+    width:100%;
+    border:none;
+    background:#e53935;
+    color:white;
+    padding:14px;
+    border-radius:9px;
+    margin-top:12px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.publish-button:disabled{
+    opacity:.6;
+}
+
+
+/* =====================================================
+   POST
+===================================================== */
+
+.post{
+    background:white;
+    border-radius:16px;
+    padding:22px;
+    margin-bottom:20px;
+    box-shadow:0 2px 7px rgba(0,0,0,.07);
+}
+
+.post-header{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:15px;
+}
+
+.post-avatar{
+    width:52px;
+    height:52px;
+    object-fit:cover;
+    border-radius:50%;
+    border:2px solid #e53935;
+    cursor:pointer;
+}
+
+.post-user{
+    cursor:pointer;
+}
+
+.post-user-name{
+    font-size:17px;
+    font-weight:bold;
+}
+
+.post-time{
+    display:block;
+    color:#777;
+    font-size:12px;
+    margin-top:3px;
+}
+
+.post-text{
+    font-size:17px;
+    line-height:1.5;
+    margin-bottom:15px;
+    white-space:pre-wrap;
+}
+
+
+/* =====================================================
+   IMAGE
+===================================================== */
+
+.post-image{
+    width:100%;
+    max-height:700px;
+    object-fit:contain;
+    display:block;
+    background:#000;
+    border-radius:12px;
+}
+
+
+/* =====================================================
+   VIDEO
+===================================================== */
+
+.post-video{
+    width:100%;
+    max-height:700px;
+    display:block;
+    background:#000;
+    border-radius:12px;
+}
+
+
+/* =====================================================
+   POST BUTTONS
+===================================================== */
+
+.post-actions{
+    display:flex;
+    border-top:1px solid #eee;
+    border-bottom:1px solid #eee;
+    margin-top:15px;
+}
+
+.post-actions button{
+    flex:1;
+    border:none;
+    background:white;
+    padding:14px 5px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.post-actions button:hover{
+    background:#f0f2f5;
+}
+
+
+/* =====================================================
+   COMMENTS
+===================================================== */
+
+.comment-form{
+    display:flex;
+    gap:8px;
+    margin-top:14px;
+}
+
+.comment-form input{
+    flex:1;
+    border:none;
+    outline:none;
+    background:#f0f2f5;
+    border-radius:25px;
+    padding:12px 15px;
+}
+
+.comment-form button{
+    border:none;
+    background:#e53935;
+    color:white;
+    border-radius:22px;
+    padding:10px 18px;
+    cursor:pointer;
+}
+
+.comments{
+    margin-top:10px;
+}
+
+.comment{
+    background:#f0f2f5;
+    padding:10px 14px;
+    border-radius:12px;
+    margin-top:7px;
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.loading{
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    text-align:center;
+    color:#666;
+}
+
+
+/* =====================================================
+   MOBILE BOTTOM NAVIGATION
+===================================================== */
+
+.mobile-nav{
+    display:none;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:800px){
+
+    .header{
+        padding:0 10px;
+    }
+
+    .logo{
+        font-size:23px;
+    }
+
+    .search{
+        display:none;
+    }
+
+    .desktop-nav{
+        display:none;
+    }
+
+    .header-user span{
+        display:none;
+    }
+
+    .page{
+        padding:10px 8px 90px;
+    }
+
+    .stories-container,
+    .moment,
+    .post{
+        border-radius:10px;
+    }
+
+    .story{
+        min-width:110px;
+        height:165px;
+    }
+
+
+    /* MOBILE NAV */
+
+    .mobile-nav{
+        display:flex;
+        position:fixed;
+        bottom:0;
+        left:0;
+        right:0;
+        height:65px;
+        background:white;
+        z-index:2000;
+        box-shadow:0 -2px 8px rgba(0,0,0,.15);
+    }
+
+    .mobile-nav a{
+        flex:1;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        text-decoration:none;
+        color:#444;
+        font-size:12px;
+        font-weight:bold;
+    }
+
+    .mobile-nav a span{
+        font-size:21px;
+        margin-bottom:3px;
+    }
+
+}
+
+
+/* =====================================================
+   SMALL PHONES
+===================================================== */
+
+@media(max-width:400px){
+
+    .moment-action{
+        font-size:13px;
+    }
+
+    .post{
+        padding:12px;
+    }
+
+    .post-actions button{
+        font-size:12px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+
+    <!-- LOGO -->
+
+    <div
+        class="logo"
+        onclick="goHome()"
+    >
+        SeBa.sl
+    </div>
+
+
+    <!-- SEARCH -->
+
+    <div class="search">
+
+        <input
+            id="searchInput"
+            type="text"
+            placeholder="Search SeBa.sl..."
+        >
+
+    </div>
+
+
+    <!-- DESKTOP NAVIGATION -->
+
+    <nav class="desktop-nav">
+
+        <a href="home.html">
+            🏠 Home
+        </a>
+
+        <a href="marketplace.html">
+            🛒 Market
+        </a>
+
+        <a href="about.html">
+            ℹ️ About
+        </a>
+
+        <a href="service.html">
+            🛠️ Services
+        </a>
+
+        <a href="contact.html">
+            📞 Contact
+        </a>
+
+    </nav>
+
+
+    <!-- PROFILE -->
+
+    <div
+        class="header-user"
+        onclick="goMyProfile()"
+    >
+
+        <img
+            <a href="profile.html, id="headerAvatar"
+            <src="https://via.placeholder.com/100">
+        
+
+        <span id="headerName">
+            Profile
+        </span>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN PAGE
+===================================================== -->
+
+<main class="page">
+
+
+    <!-- =================================================
+         STORIES
+    ================================================== -->
+
+    <section class="stories-container">
+
+        <div class="section-title">
+            📖 Stories
+        </div>
+
+
+        <div
+            class="stories"
+            id="stories"
+        >
+
+            <div class="loading">
+                Loading stories...
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         CREATE MOMENT
+    ================================================== -->
+
+    <section class="moment">
+
+
+        <div class="moment-top">
+
+            <img
+                id="myAvatar"
+                src="https://via.placeholder.com/100"
+            >
+
+
+            <div
+                class="moment-input"
+                onclick="openMoment()"
+            >
+                What's happening? Share a moment...
+            </div>
+
+        </div>
+
+
+        <!-- MOMENT BUTTONS -->
+
+        <div class="moment-actions">
+
+
+            <!-- VIDEO -->
+
+            <div
+                class="moment-action"
+                onclick="selectVideo()"
+            >
+                🎥 Video
+            </div>
+
+
+            <!-- PHOTO -->
+
+            <div
+                class="moment-action"
+                onclick="selectPhoto()"
+            >
+                📷 Photo
+            </div>
+
+
+            <!-- MOMENT -->
+
+            <div
+                class="moment-action"
+                onclick="openMoment()"
+            >
+                ✍️ Moment
+            </div>
+
+        </div>
+
+
+        <!-- HIDDEN VIDEO INPUT -->
+
+        <input
+            type="file"
+            id="videoInput"
+            accept="video/*"
+            hidden
+        >
+
+
+        <!-- HIDDEN PHOTO INPUT -->
+
+        <input
+            type="file"
+            id="photoInput"
+            accept="image/*"
+            hidden
+        >
+
+
+        <!-- POST FORM -->
+
+        <div
+            class="post-form"
+            id="postForm"
+        >
+
+
+            <textarea
+                id="caption"
+                placeholder="Write your moment..."
+            ></textarea>
+
+
+            <div
+                class="selected-file"
+                id="selectedFile"
+            ></div>
+
+
+            <button
+                class="publish-button"
+                id="publishButton"
+                onclick="publishMoment()"
+            >
+                Publish Moment
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         FEED
+    ================================================== -->
+
+    <section id="feed">
+
+        <div class="loading">
+            Loading moments...
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     MOBILE NAVIGATION
+===================================================== -->
+
+<nav class="mobile-nav">
+
+
+    <a href="home.html">
+
+        <span>🏠</span>
+
+        Home
+
+    </a>
+
+
+    <a href="marketplace.html">
+
+        <span>🛒</span>
+
+        Market
+
+    </a>
+
+
+    <a href="profile.html">
+
+        <span>👤</span>
+
+        Profile
+
+    </a>
+
+
+    <a href="service.html">
+
+        <span>🛠️</span>
+
+        Services
+
+    </a>
+
+
+    <a href="contact.html">
+
+        <span>📞</span>
+
+        Contact
+
+    </a>
+
+</nav>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
+
+
+<script>
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+let currentUser = null;
+
+let currentProfile = null;
+
+let selectedFile = null;
+
+
+/* =====================================================
+   START
+===================================================== */
+
+async function startHome(){
+
+    try{
+
+
+        /* GET LOGGED-IN USER */
+
+        const result =
+            await supabase.auth.getUser();
+
+
+        if(
+            result.error ||
+            !result.data ||
+            !result.data.user
+        ){
+
+            window.location.href =
+                "login.html";
+
+            return;
+
+        }
+
+
+        currentUser =
+            result.data.user;
+
+
+        console.log(
+            "Current user:",
+            currentUser.id
+        );
+
+
+        /* LOAD PROFILE */
+
+        const profileResult =
+            await supabase
+            .from("profiles")
+            .select("*")
+            .eq(
+                "id",
+                currentUser.id
+            )
+            .maybeSingle();
+
+
+        if(profileResult.error){
+
+            console.log(
+                "Profile error:",
+                profileResult.error
+            );
+
+        }
+
+
+        currentProfile =
+            profileResult.data;
+
+
+        /* SHOW PROFILE */
+
+        if(currentProfile){
+
+            const avatar =
+                currentProfile.avatar_url ||
+                "https://via.placeholder.com/100";
+
+
+            document
+            .getElementById("myAvatar")
+            .src = avatar;
+
+
+            document
+            .getElementById("headerAvatar")
+            .src = avatar;
+
+
+            document
+            .getElementById("headerName")
+            .textContent =
+                currentProfile.full_name ||
+                "Profile";
+
+        }
+
+
+        /* LOAD STORIES */
+
+        await loadStories();
+
+
+        /* LOAD FEED */
+
+        await loadFeed();
+
+
+    }catch(error){
+
+        console.error(error);
+
+        alert(
+            "Home error: " +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+function goHome(){
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+function goMyProfile(){
+
+    window.location.href =
+        "profile.html";
+
+}
+
+
+/* =====================================================
+   OPEN MOMENT
+===================================================== */
+
+function openMoment(){
+
+    const form =
+        document.getElementById(
+            "postForm"
+        );
+
+
+    form.style.display =
+        "block";
+
+
+    document
+    .getElementById("caption")
+    .focus();
+
+
+    form.scrollIntoView({
+
+        behavior:"smooth",
+
+        block:"center"
+
+    });
+
+}
+
+
+/* =====================================================
+   SELECT VIDEO
+===================================================== */
+
+function selectVideo(){
+
+    const input =
+        document.getElementById(
+            "videoInput"
+        );
+
+
+    input.value = "";
+
+    input.click();
+
+}
+
+
+/* =====================================================
+   SELECT PHOTO
+===================================================== */
+
+function selectPhoto(){
+
+    const input =
+        document.getElementById(
+            "photoInput"
+        );
+
+
+    input.value = "";
+
+    input.click();
+
+}
+
+
+/* =====================================================
+   VIDEO SELECTED
+===================================================== */
+
+document
+.getElementById("videoInput")
+.addEventListener(
+    "change",
+    function(){
+
+        if(
+            this.files &&
+            this.files[0]
+        ){
+
+            selectedFile =
+                this.files[0];
+
+
+            showFile();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   PHOTO SELECTED
+===================================================== */
+
+document
+.getElementById("photoInput")
+.addEventListener(
+    "change",
+    function(){
+
+        if(
+            this.files &&
+            this.files[0]
+        ){
+
+            selectedFile =
+                this.files[0];
+
+
+            showFile();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   SHOW FILE
+===================================================== */
+
+function showFile(){
+
+    openMoment();
+
+
+    document
+    .getElementById("selectedFile")
+    .textContent =
+        "Selected: " +
+        selectedFile.name;
+
+}
+
+
+/* =====================================================
+   PUBLISH MOMENT
+===================================================== */
+
+async function publishMoment(){
+
+
+    /* GET USER AGAIN */
+
+    const userResult =
+        await supabase.auth.getUser();
+
+
+    if(
+        userResult.error ||
+        !userResult.data ||
+        !userResult.data.user
+    ){
+
+        alert(
+            "Please login again."
+        );
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
+
+
+    const user =
+        userResult.data.user;
+
+
+    /* GET TEXT */
+
+    const caption =
+        document
+        .getElementById("caption")
+        .value
+        .trim();
+
+
+    /* CHECK */
+
+    if(
+        !caption &&
+        !selectedFile
+    ){
+
+        alert(
+            "Write a moment or select a photo/video."
+        );
+
+        return;
+
+    }
+
+
+    const button =
+        document.getElementById(
+            "publishButton"
+        );
+
+
+    button.disabled = true;
+
+    button.textContent =
+        "Publishing...";
+
+
+    try{
+
+
+        let mediaUrl = null;
+
+        let mediaType = null;
+
+
+        /* =========================================
+           UPLOAD MEDIA
+        ========================================= */
+
+        if(selectedFile){
+
+
+            /* CHECK FILE */
+
+            if(
+                !selectedFile.type.startsWith(
+                    "image/"
+                ) &&
+                !selectedFile.type.startsWith(
+                    "video/"
+                )
+            ){
+
+                throw new Error(
+                    "Only photos and videos are allowed."
+                );
+
+            }
+
+
+            /* TYPE */
+
+            mediaType =
+                selectedFile.type.startsWith(
+                    "video/"
+                )
+                ?
+                "video"
+                :
+                "image";
+
+
+            /* EXTENSION */
+
+            const extension =
+                selectedFile.name
+                .split(".")
+                .pop()
+                .toLowerCase();
+
+
+            /* FILE PATH */
+
+            const filePath =
+                user.id +
+                "/" +
+                Date.now() +
+                "_" +
+                Math.random()
+                .toString(36)
+                .substring(2) +
+                "." +
+                extension;
+
+
+            /* UPLOAD */
+
+            const upload =
+                await supabase.storage
+                .from("post-media")
+                .upload(
+                    filePath,
+                    selectedFile,
+                    {
+                        cacheControl:
+                            "3600",
+
+                        upsert:
+                            false
+                    }
+                );
+
+
+            if(upload.error){
+
+                throw new Error(
+                    "Upload failed: " +
+                    upload.error.message
+                );
+
+            }
+
+
+            /* GET URL */
+
+            const publicUrl =
+                supabase.storage
+                .from("post-media")
+                .getPublicUrl(
+                    filePath
+                );
+
+
+            mediaUrl =
+                publicUrl.data.publicUrl;
+
+        }
+
+
+        /* =========================================
+           SAVE POST
+        ========================================= */
+
+        const insert =
+            await supabase
+            .from("posts")
+            .insert({
+
+                user_id:
+                    user.id,
+
+                caption:
+                    caption || null,
+
+                media_url:
+                    mediaUrl,
+
+                media_type:
+                    mediaType
+
+            });
+
+
+        if(insert.error){
+
+            throw new Error(
+                "Database error: " +
+                insert.error.message
+            );
+
+        }
+
+
+        /* RESET */
+
+        document
+        .getElementById("caption")
+        .value = "";
+
+
+        document
+        .getElementById("selectedFile")
+        .textContent = "";
+
+
+        document
+        .getElementById("videoInput")
+        .value = "";
+
+
+        document
+        .getElementById("photoInput")
+        .value = "";
+
+
+        selectedFile = null;
+
+
+        document
+        .getElementById("postForm")
+        .style.display =
+            "none";
+
+
+        /* REFRESH FEED */
+
+        await loadFeed();
+
+
+        alert(
+            "Moment published successfully!"
+        );
+
+
+    }catch(error){
+
+        console.error(error);
+
+
+        alert(
+            "Moment failed: " +
+            error.message
+        );
+
+
+    }finally{
+
+        button.disabled = false;
+
+        button.textContent =
+            "Publish Moment";
+
+    }
+
+}
+
+
+/* =====================================================
+   LOAD FEED
+===================================================== */
+
+async function loadFeed(){
+
+    const feed =
+        document.getElementById(
+            "feed"
+        );
+
+
+    feed.innerHTML =
+        `
+        <div class="loading">
+            Loading moments...
+        </div>
+        `;
+
+
+    const result =
+        await supabase
+        .from("posts")
+        .select(`
+            id,
+            user_id,
+            caption,
+            media_url,
+            media_type,
+            created_at,
+            profiles(
+                id,
+                full_name,
+                avatar_url
+            )
+        `)
+        .order(
+            "created_at",
+            {
+                ascending:false
+            }
+        );
+
+
+    if(result.error){
+
+        console.error(result.error);
+
+
+        feed.innerHTML =
+            `
+            <div class="loading">
+
+                Unable to load moments.
+
+                <br><br>
+
+                ${escapeHTML(
+                    result.error.message
+                )}
+
+            </div>
+            `;
+
+        return;
+
+    }
+
+
+    feed.innerHTML = "";
+
+
+    if(
+        !result.data ||
+        result.data.length === 0
+    ){
+
+        feed.innerHTML =
+            `
+            <div class="loading">
+
+                No moments yet.
+
+                <br><br>
+
+                Be the first person to share!
+
+            </div>
+            `;
+
+        return;
+
+    }
+
+
+    result.data.forEach(
+        function(post){
+
+            createPost(post);
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   CREATE POST
+===================================================== */
+
+function createPost(post){
+
+    const profile =
+        post.profiles || {};
+
+
+    const name =
+        profile.full_name ||
+        "SeBa User";
+
+
+    const avatar =
+        profile.avatar_url ||
+        "https://via.placeholder.com/100";
+
+
+    const element =
+        document.createElement(
+            "article"
+        );
+
+
+    element.className =
+        "post";
+
+
+    let mediaHTML = "";
+
+
+    /* VIDEO */
+
+    if(
+        post.media_url &&
+        post.media_type === "video"
+    ){
+
+        mediaHTML =
+            `
+            <video
+                class="post-video"
+                controls
+                playsinline
+                preload="metadata"
+            >
+
+                <source
+                    src="${post.media_url}"
+                >
+
+                Your browser does not support video.
+
+            </video>
+            `;
+
+    }
+
+
+    /* IMAGE */
+
+    else if(
+        post.media_url &&
+        post.media_type === "image"
+    ){
+
+        mediaHTML =
+            `
+            <img
+                class="post-image"
+                src="${post.media_url}"
+                alt="Moment"
+                loading="lazy"
+            >
+            `;
+
+    }
+
+
+    element.innerHTML = `
+
+        <div class="post-header">
+
+
+            <img
+                class="post-avatar"
+                src="${avatar}"
+                onclick="openProfile('${post.user_id}')"
+            >
+
+
+            <div
+                class="post-user"
+                onclick="openProfile('${post.user_id}')"
+            >
+
+                <div class="post-user-name">
+
+                    ${escapeHTML(name)}
+
+                </div>
+
+
+                <span class="post-time">
+
+                    ${formatDate(
+                        post.created_at
+                    )}
+
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+        ${
+            post.caption
+            ?
+            `
+            <div class="post-text">
+
+                ${escapeHTML(
+                    post.caption
+                )}
+
+            </div>
+            `
+            :
+            ""
+        }
+
+
+        ${mediaHTML}
+
+
+        <div class="post-actions">
+
+
+            <button
+                onclick="likePost(${post.id})"
+            >
+                ❤️ Like
+            </button>
+
+
+            <button
+                onclick="focusComment(${post.id})"
+            >
+                💬 Comment
+            </button>
+
+
+            <button
+                onclick="sharePost(${post.id})"
+            >
+                ↗️ Share
+            </button>
+
+
+        </div>
+
+
+        <div class="comment-form">
+
+
+            <input
+                id="comment-${post.id}"
+                placeholder="Write a comment..."
+            >
+
+
+            <button
+                onclick="addComment(${post.id})"
+            >
+                Send
+            </button>
+
+
+        </div>
+
+
+        <div
+            class="comments"
+            id="comments-${post.id}"
+        ></div>
+
+    `;
+
+
+    document
+    .getElementById("feed")
+    .appendChild(element);
+
+
+    loadComments(
+        post.id
+    );
+
+}
+
+
+/* =====================================================
+   OPEN PROFILE
+===================================================== */
+
+function openProfile(userId){
+
+    window.location.href =
+        "profile.html?id=" +
+        encodeURIComponent(userId);
+
+}
+
+
+/* =====================================================
+   COMMENTS
+===================================================== */
+
+function focusComment(postId){
+
+    const input =
+        document.getElementById(
+            "comment-" + postId
+        );
+
+
+    if(input){
+
+        input.focus();
+
+    }
+
+}
+
+
+async function addComment(postId){
+
+    const userResult =
+        await supabase.auth.getUser();
+
+
+    if(
+        userResult.error ||
+        !userResult.data ||
+        !userResult.data.user
+    ){
+
+        alert(
+            "Please login again."
+        );
+
+        return;
+
+    }
+
+
+    const input =
+        document.getElementById(
+            "comment-" + postId
+        );
+
+
+    const text =
+        input.value.trim();
+
+
+    if(!text){
+
+        return;
+
+    }
+
+
+    const result =
+        await supabase
+        .from("comments")
+        .insert({
+
+            post_id:
+                postId,
+
+            user_id:
+                userResult.data.user.id,
+
+            comment:
+                text
+
+        });
+
+
+    if(result.error){
+
+        alert(
+            "Comment failed: " +
+            result.error.message
+        );
+
+        return;
+
+    }
+
+
+    input.value = "";
+
+
+    await loadComments(
+        postId
+    );
+
+}
+
+
+/* =====================================================
+   LOAD COMMENTS
+===================================================== */
+
+async function loadComments(postId){
+
+    const box =
+        document.getElementById(
+            "comments-" + postId
+        );
+
+
+    if(!box){
+
+        return;
+
+    }
+
+
+    const result =
+        await supabase
+        .from("comments")
+        .select(`
+            id,
+            comment,
+            created_at,
+            profiles(
+                full_name
+            )
+        `)
+        .eq(
+            "post_id",
+            postId
+        )
+        .order(
+            "created_at",
+            {
+                ascending:true
+            }
+        );
+
+
+    if(result.error){
+
+        console.log(
+            result.error
+        );
+
+        return;
+
+    }
+
+
+    box.innerHTML = "";
+
+
+    result.data.forEach(
+        function(comment){
+
+            const name =
+                comment.profiles?.full_name ||
+                "User";
+
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+
+            div.className =
+                "comment";
+
+
+            div.innerHTML = `
+
+                <strong>
+
+                    ${escapeHTML(name)}
+
+                </strong>
+
+                <br>
+
+                ${escapeHTML(
+                    comment.comment
+                )}
+
+            `;
+
+
+            box.appendChild(div);
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   LIKE
+===================================================== */
+
+async function likePost(postId){
+
+    const userResult =
+        await supabase.auth.getUser();
+
+
+    if(
+        userResult.error ||
+        !userResult.data ||
+        !userResult.data.user
+    ){
+
+        alert(
+            "Please login again."
+        );
+
+        return;
+
+    }
+
+
+    const userId =
+        userResult.data.user.id;
+
+
+    const existing =
+        await supabase
+        .from("likes")
+        .select("id")
+        .eq(
+            "post_id",
+            postId
+        )
+        .eq(
+            "user_id",
+            userId
+        )
+        .maybeSingle();
+
+
+    if(existing.error){
+
+        alert(
+            existing.error.message
+        );
+
+        return;
+
+    }
+
+
+    if(existing.data){
+
+        await supabase
+        .from("likes")
+        .delete()
+        .eq(
+            "id",
+            existing.data.id
+        );
+
+    }else{
+
+        const result =
+            await supabase
+            .from("likes")
+            .insert({
+
+                post_id:
+                    postId,
+
+                user_id:
+                    userId
+
+            });
+
+
+        if(result.error){
+
+            alert(
+                result.error.message
+            );
+
+        }
+
+    }
+
+}
+
+
+/* =====================================================
+   SHARE
+===================================================== */
+
+async function sharePost(postId){
+
+    const url =
+        window.location.origin +
+        window.location.pathname +
+        "#post-" +
+        postId;
+
+
+    try{
+
+        if(
+            navigator.share
+        ){
+
+            await navigator.share({
+
+                title:
+                    "SeBa.sl Moment",
+
+                text:
+                    "Check this moment on SeBa.sl",
+
+                url:
+                    url
+
+            });
+
+        }else{
+
+            await navigator
+            .clipboard
+            .writeText(url);
+
+
+            alert(
+                "Moment link copied!"
+            );
+
+        }
+
+    }catch(error){
+
+        console.log(
+            "Share cancelled."
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   STORIES
+===================================================== */
+
+async function loadStories(){
+
+    const container =
+        document.getElementById(
+            "stories"
+        );
+
+
+    container.innerHTML = "";
+
+
+    /* YOUR STORY */
+
+    const ownStory =
+        document.createElement(
+            "div"
+        );
+
+
+    ownStory.className =
+        "story";
+
+
+    const ownAvatar =
+        currentProfile?.avatar_url ||
+        "https://via.placeholder.com/200";
+
+
+    ownStory.innerHTML = `
+
+        <img
+            class="story-background"
+            src="${ownAvatar}"
+        >
+
+
+        <img
+            class="story-avatar"
+            src="${ownAvatar}"
+        >
+
+
+        <div class="story-name">
+
+            Your Story
+
+        </div>
+
+    `;
+
+
+    ownStory.onclick =
+        function(){
+
+            goMyProfile();
+
+        };
+
+
+    container.appendChild(
+        ownStory
+    );
+
+
+    /* OTHER USERS */
+
+    const result =
+        await supabase
+        .from("profiles")
+        .select(
+            "id,full_name,avatar_url"
+        )
+        .limit(15);
+
+
+    if(result.error){
+
+        console.log(
+            result.error
+        );
+
+        return;
+
+    }
+
+
+    result.data.forEach(
+        function(profile){
+
+            if(
+                profile.id ===
+                currentUser.id
+            ){
+
+                return;
+
+            }
+
+
+            const story =
+                document.createElement(
+                    "div"
+                );
+
+
+            story.className =
+                "story";
+
+
+            const avatar =
+                profile.avatar_url ||
+                "https://via.placeholder.com/200";
+
+
+            story.innerHTML = `
+
+                <img
+                    class="story-background"
+                    src="${avatar}"
+                >
+
+
+                <img
+                    class="story-avatar"
+                    src="${avatar}"
+                >
+
+
+                <div class="story-name">
+
+                    ${escapeHTML(
+                        profile.full_name ||
+                        "User"
+                    )}
+
+                </div>
+
+            `;
+
+
+            story.onclick =
+                function(){
+
+                    openProfile(
+                        profile.id
+                    );
+
+                };
+
+
+            container.appendChild(
+                story
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+document
+.getElementById("searchInput")
+.addEventListener(
+    "input",
+    function(){
+
+        const search =
+            this.value
+            .toLowerCase()
+            .trim();
+
+
+        document
+        .querySelectorAll(".post")
+        .forEach(
+            function(post){
+
+                const text =
+                    post.innerText
+                    .toLowerCase();
+
+
+                post.style.display =
+                    text.includes(search)
+                    ?
+                    "block"
+                    :
+                    "none";
+
+            }
+        );
+
+    }
+);
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(text){
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        text || "";
+
+
+    return div.innerHTML;
+
+}
+
+
+/* =====================================================
+   DATE
+===================================================== */
+
+function formatDate(date){
+
+    return new Date(date)
+    .toLocaleString();
+
+}
+
+
+/* =====================================================
+   START APPLICATION
+===================================================== */
+
+startHome();
+
+</script>
+
+</body>
+</html>
